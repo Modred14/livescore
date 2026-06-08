@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+/* src/app/globals.css */
+
+@import "../styles/variables.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap");
+
+/* ─────────────────────────────────────────────
+   Base resets & defaults
+───────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-2);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+  }
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  a:hover {
+    color: var(--color-primary-hover);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font-family: var(--font-body);
+  }
+
+  /* Focus-visible ring — brand blue */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-surface-3);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-tertiary);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Component utilities
+───────────────────────────────────────────── */
+@layer components {
+  /* Container */
+  .container-app {
+    @apply w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section spacing */
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  /* Glass card */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      var(--color-brand-600) 0%,
+      var(--color-brand-400) 100%
+    );
+  }
+
+  /* Brand gradient background */
+  .bg-brand-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--color-brand-700) 0%,
+      var(--color-brand-500) 100%
+    );
+  }
+
+  /* Status dot */
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+  }
+  .status-dot.live {
+    @apply bg-red-500;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  .status-dot.done {
+    @apply bg-green-500;
+  }
+  .status-dot.soon {
+    @apply bg-yellow-400;
+  }
+
+  /* Page header */
+  .page-header {
+    @apply mb-8;
+  }
+  .page-header h1 {
+    @apply text-3xl md:text-4xl font-bold text-slate-900;
+  }
+  .page-header p {
+    @apply mt-2 text-slate-500 text-base;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-slate-200 my-6;
+  }
+
+  /* Nav link active state */
+  .nav-link {
+    @apply relative px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-150;
+    color: var(--color-text-secondary);
+  }
+  .nav-link:hover {
+    @apply text-brand-600 bg-brand-50;
+  }
+  .nav-link.active {
+    @apply text-brand-700 bg-brand-100 font-semibold;
+  }
+
+  /* Auth card wrapper */
+  .auth-card {
+    @apply w-full max-w-md mx-auto bg-white rounded-2xl shadow-lg border border-slate-100 p-8 md:p-10;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Utility overrides
+───────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+}
