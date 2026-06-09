@@ -38,6 +38,7 @@ export const API = {
     LOGIN:    '/api/auth/login',
     REGISTER: '/api/auth/register',
     LOGOUT:   '/api/auth/logout',
+    ME:       '/api/auth/me',
   },
   TOURNAMENTS: '/api/tournaments',
   TOURNAMENT:  (id) => `/api/tournaments/${id}`,

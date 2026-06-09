@@ -1,11 +1,7 @@
 @import "tailwindcss";
-
-/* src/app/globals.css */
-
 @import "../styles/variables.css";
 
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap");
-
+/* rest of file */
 /* ─────────────────────────────────────────────
    Base resets & defaults
 ───────────────────────────────────────────── */
@@ -170,12 +166,13 @@
     @apply relative px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-150;
     color: var(--color-text-secondary);
   }
-  .nav-link:hover {
-    @apply text-brand-600 bg-brand-50;
-  }
-  .nav-link.active {
-    @apply text-brand-700 bg-brand-100 font-semibold;
-  }
+.nav-link:hover {
+  @apply text-blue-600 bg-blue-50;
+}
+
+.nav-link.active {
+  @apply text-blue-700 bg-blue-100 font-semibold;
+}
 
   /* Auth card wrapper */
   .auth-card {
