@@ -15,6 +15,7 @@ export const ROUTES = {
   TOURNAMENTS:        '/tournaments',
   TOURNAMENT_CREATE:  '/tournaments/create',
   TOURNAMENT:         (id) => `/tournaments/${id}`,
+  TOURNAMENT_EDIT:    (id) => `/tournaments/${id}/edit`,
   TOURNAMENT_SETTINGS:(id) => `/tournaments/${id}/settings`,
 
   TEAMS:         (tournamentId) => `/tournaments/${tournamentId}/teams`,
@@ -58,28 +59,34 @@ export const TOURNAMENT_STATUS = {
   UPCOMING:   'upcoming',
   ACTIVE:     'active',
   COMPLETED:  'completed',
-  CANCELLED:  'cancelled',
 };
 
-export const TOURNAMENT_FORMAT = {
-  LEAGUE:        'league',
-  KNOCKOUT:      'knockout',
-  GROUP_KNOCKOUT: 'group_knockout',
+export const TOURNAMENT_TYPE = {
+  LEAGUE:      'league',
+  KNOCKOUT:    'knockout',
+  GROUP_STAGE: 'group_stage',
+  ROUND_ROBIN: 'round_robin',
 };
+
+// Keep TOURNAMENT_FORMAT as alias for backward compat
+export const TOURNAMENT_FORMAT = TOURNAMENT_TYPE;
 
 export const TOURNAMENT_STATUS_LABELS = {
   [TOURNAMENT_STATUS.DRAFT]:     'Draft',
   [TOURNAMENT_STATUS.UPCOMING]:  'Upcoming',
   [TOURNAMENT_STATUS.ACTIVE]:    'Active',
   [TOURNAMENT_STATUS.COMPLETED]: 'Completed',
-  [TOURNAMENT_STATUS.CANCELLED]: 'Cancelled',
 };
 
-export const TOURNAMENT_FORMAT_LABELS = {
-  [TOURNAMENT_FORMAT.LEAGUE]:         'League',
-  [TOURNAMENT_FORMAT.KNOCKOUT]:       'Knockout',
-  [TOURNAMENT_FORMAT.GROUP_KNOCKOUT]: 'Group + Knockout',
+export const TOURNAMENT_TYPE_LABELS = {
+  [TOURNAMENT_TYPE.LEAGUE]:      'League',
+  [TOURNAMENT_TYPE.KNOCKOUT]:    'Knockout',
+  [TOURNAMENT_TYPE.GROUP_STAGE]: 'Group Stage',
+  [TOURNAMENT_TYPE.ROUND_ROBIN]: 'Round Robin',
 };
+
+// Keep TOURNAMENT_FORMAT_LABELS as alias
+export const TOURNAMENT_FORMAT_LABELS = TOURNAMENT_TYPE_LABELS;
 
 // ── Match ─────────────────────────────────────────────────────────────────────
 export const MATCH_STATUS = {
