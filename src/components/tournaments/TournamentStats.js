@@ -5,18 +5,22 @@
 import { StatCard } from '@/components/ui/Card';
 
 /**
- * TournamentStats — renders a row of stat cards for a tournament detail page.
- * Updated in Phase 4 to include team_count and player_count.
+ * TournamentStats — stat cards for the tournament detail page.
+ * Updated in Phase 5 — all four stats are now fully wired from real DB data.
+ *
+ * tournament prop now contains:
+ *   team_count, match_count, completed_matches, live_matches, player_count
+ * all returned by the Phase 3 getTournamentById() query with Phase 5 additions.
  */
 export default function TournamentStats({ tournament }) {
   if (!tournament) return null;
 
   const {
     team_count        = 0,
+    player_count      = 0,
     match_count       = 0,
     completed_matches = 0,
     live_matches      = 0,
-    player_count      = 0,
   } = tournament;
 
   const upcoming_matches = Math.max(0, match_count - completed_matches - live_matches);
@@ -25,7 +29,7 @@ export default function TournamentStats({ tournament }) {
     {
       label:     'Teams',
       value:     team_count,
-      caption:   team_count === 1 ? '1 team registered' : `${team_count} teams registered`,
+      caption:   `${player_count} player${player_count !== 1 ? 's' : ''} registered`,
       iconColor: 'bg-blue-50',
       iconText:  'text-blue-600',
       icon: (
@@ -35,23 +39,9 @@ export default function TournamentStats({ tournament }) {
       ),
     },
     {
-      label:     'Players',
-      value:     player_count,
-      caption:   team_count > 0
-        ? `Avg ${team_count > 0 ? Math.round(player_count / team_count) : 0} per team`
-        : 'No teams yet',
-      iconColor: 'bg-purple-50',
-      iconText:  'text-purple-600',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-          <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
-        </svg>
-      ),
-    },
-    {
-      label:     'Total Matches',
+      label:     'Matches',
       value:     match_count,
-      caption:   `${completed_matches} completed`,
+      caption:   `${completed_matches} completed · ${upcoming_matches} upcoming`,
       iconColor: 'bg-green-50',
       iconText:  'text-green-600',
       icon: (
@@ -63,13 +53,25 @@ export default function TournamentStats({ tournament }) {
     {
       label:     'Live Now',
       value:     live_matches,
-      caption:   live_matches > 0 ? 'In progress' : upcoming_matches > 0 ? `${upcoming_matches} upcoming` : 'No live games',
+      caption:   live_matches > 0 ? 'In progress right now' : 'No live matches',
       iconColor: live_matches > 0 ? 'bg-red-50'    : 'bg-slate-50',
       iconText:  live_matches > 0 ? 'text-red-600' : 'text-slate-400',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
           <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
           <path fillRule="evenodd" d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.163 3.75A.75.75 0 0110 12h4a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75z" clipRule="evenodd" />
+        </svg>
+      ),
+    },
+    {
+      label:     'Upcoming',
+      value:     upcoming_matches,
+      caption:   upcoming_matches > 0 ? 'Scheduled fixtures' : 'No upcoming matches',
+      iconColor: 'bg-orange-50',
+      iconText:  'text-orange-600',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clipRule="evenodd" />
         </svg>
       ),
     },

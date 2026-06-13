@@ -18,14 +18,19 @@ export const ROUTES = {
   TOURNAMENT_EDIT:    (id) => `/tournaments/${id}/edit`,
   TOURNAMENT_SETTINGS:(id) => `/tournaments/${id}/settings`,
 
-  TEAMS:         (tournamentId) => `/tournaments/${tournamentId}/teams`,
-  TEAM_CREATE:   (tournamentId) => `/tournaments/${tournamentId}/teams/create`,
+  TEAMS:              (tournamentId)                    => `/tournaments/${tournamentId}/teams`,
+  TEAM_CREATE:        (tournamentId)                    => `/tournaments/${tournamentId}/teams/create`,
+  TEAM:               (tournamentId, teamId)            => `/tournaments/${tournamentId}/teams/${teamId}`,
+  TEAM_EDIT:          (tournamentId, teamId)            => `/tournaments/${tournamentId}/teams/${teamId}/edit`,
+  TEAM_PLAYER_CREATE: (tournamentId, teamId)            => `/tournaments/${tournamentId}/teams/${teamId}/players/create`,
+  TEAM_PLAYER_EDIT:   (tournamentId, teamId, playerId)  => `/tournaments/${tournamentId}/teams/${teamId}/players/${playerId}/edit`,
 
   PLAYERS:       (tournamentId) => `/tournaments/${tournamentId}/players`,
 
   MATCHES:       (tournamentId) => `/tournaments/${tournamentId}/matches`,
   MATCH_CREATE:  (tournamentId) => `/tournaments/${tournamentId}/matches/create`,
   MATCH:         (tournamentId, matchId) => `/tournaments/${tournamentId}/matches/${matchId}`,
+  MATCH_EDIT:    (tournamentId, matchId) => `/tournaments/${tournamentId}/matches/${matchId}/edit`,
   MATCH_LIVE:    (tournamentId, matchId) => `/tournaments/${tournamentId}/matches/${matchId}/live`,
   MATCH_EVENTS:  (tournamentId, matchId) => `/tournaments/${tournamentId}/matches/${matchId}/events`,
 
@@ -43,12 +48,18 @@ export const API = {
   },
   TOURNAMENTS: '/api/tournaments',
   TOURNAMENT:  (id) => `/api/tournaments/${id}`,
-  TEAMS:       '/api/teams',
-  TEAM:        (id) => `/api/teams/${id}`,
+  TEAMS:              '/api/teams',
+  TEAM:               (id) => `/api/teams/${id}`,
+  TOURNAMENT_TEAMS:   (tournamentId)          => `/api/tournaments/${tournamentId}/teams`,
+  TOURNAMENT_TEAM:    (tournamentId, teamId)  => `/api/tournaments/${tournamentId}/teams/${teamId}`,
+  TEAM_PLAYERS:       (tournamentId, teamId)  => `/api/tournaments/${tournamentId}/teams/${teamId}/players`,
+  TEAM_PLAYER:        (tournamentId, teamId, playerId) => `/api/tournaments/${tournamentId}/teams/${teamId}/players/${playerId}`,
   PLAYERS:     '/api/players',
   PLAYER:      (id) => `/api/players/${id}`,
-  MATCHES:     '/api/matches',
-  MATCH:       (id) => `/api/matches/${id}`,
+  MATCHES:              '/api/matches',
+  MATCH:                (id) => `/api/matches/${id}`,
+  TOURNAMENT_MATCHES:   (tournamentId)            => `/api/tournaments/${tournamentId}/matches`,
+  TOURNAMENT_MATCH:     (tournamentId, matchId)   => `/api/tournaments/${tournamentId}/matches/${matchId}`,
   STANDINGS:   '/api/standings',
   EVENTS:      '/api/events',
 };
@@ -59,6 +70,7 @@ export const TOURNAMENT_STATUS = {
   UPCOMING:   'upcoming',
   ACTIVE:     'active',
   COMPLETED:  'completed',
+  FINISHED:   'completed',  // alias used in UI labels
 };
 
 export const TOURNAMENT_TYPE = {
