@@ -60,6 +60,9 @@ export const API = {
   MATCH:                (id) => `/api/matches/${id}`,
   TOURNAMENT_MATCHES:   (tournamentId)            => `/api/tournaments/${tournamentId}/matches`,
   TOURNAMENT_MATCH:     (tournamentId, matchId)   => `/api/tournaments/${tournamentId}/matches/${matchId}`,
+  MATCH_STATUS_URL: (tournamentId, matchId) => `/api/tournaments/${tournamentId}/matches/${matchId}/status`,
+  MATCH_EVENTS:     (tournamentId, matchId) => `/api/tournaments/${tournamentId}/matches/${matchId}/events`,
+  MATCH_EVENT:      (tournamentId, matchId, eventId) => `/api/tournaments/${tournamentId}/matches/${matchId}/events/${eventId}`,
   STANDINGS:   '/api/standings',
   EVENTS:      '/api/events',
 };
@@ -121,30 +124,43 @@ export const MATCH_STATUS_LABELS = {
 
 // ── Events ────────────────────────────────────────────────────────────────────
 export const EVENT_TYPE = {
-  GOAL:         'goal',
-  OWN_GOAL:     'own_goal',
-  PENALTY:      'penalty',
-  YELLOW_CARD:  'yellow_card',
-  RED_CARD:     'red_card',
-  YELLOW_RED:   'yellow_red',
-  SUBSTITUTION: 'substitution',
-  KICK_OFF:     'kick_off',
-  FULL_TIME:    'full_time',
-  HALF_TIME:    'half_time',
+  GOAL:           'goal',
+  OWN_GOAL:       'own_goal',
+  PENALTY_GOAL:   'penalty_goal',
+  PENALTY_MISSED: 'penalty_missed',
+  YELLOW_CARD:    'yellow_card',
+  RED_CARD:       'red_card',
+  YELLOW_RED:     'yellow_red_card',
+  SUBSTITUTION:   'substitution',
+  KICK_OFF:       'kick_off',
+  HALF_TIME_EVT:  'half_time',
+  SECOND_HALF:    'second_half',
+  FULL_TIME:      'full_time',
+  // legacy aliases
+  PENALTY:        'penalty_goal',
 };
 
 export const EVENT_TYPE_LABELS = {
-  [EVENT_TYPE.GOAL]:         'Goal',
-  [EVENT_TYPE.OWN_GOAL]:     'Own Goal',
-  [EVENT_TYPE.PENALTY]:      'Penalty',
-  [EVENT_TYPE.YELLOW_CARD]:  'Yellow Card',
-  [EVENT_TYPE.RED_CARD]:     'Red Card',
-  [EVENT_TYPE.YELLOW_RED]:   'Yellow-Red Card',
-  [EVENT_TYPE.SUBSTITUTION]: 'Substitution',
-  [EVENT_TYPE.KICK_OFF]:     'Kick Off',
-  [EVENT_TYPE.FULL_TIME]:    'Full Time',
-  [EVENT_TYPE.HALF_TIME]:    'Half Time',
+  goal:            'Goal',
+  own_goal:        'Own Goal',
+  penalty_goal:    'Penalty Goal',
+  penalty_missed:  'Penalty Missed',
+  yellow_card:     'Yellow Card',
+  red_card:        'Red Card',
+  yellow_red_card: 'Yellow-Red Card',
+  substitution:    'Substitution',
+  kick_off:        'Kick Off',
+  half_time:       'Half Time',
+  second_half:     'Second Half',
+  full_time:       'Full Time',
 };
+
+/** Which event types increase the score? */
+export const SCORING_EVENTS = new Set(['goal', 'penalty_goal', 'own_goal']);
+/** Which events are card events? */
+export const CARD_EVENTS    = new Set(['yellow_card', 'red_card', 'yellow_red_card']);
+/** Which events are match lifecycle events? */
+export const LIFECYCLE_EVENTS = new Set(['kick_off','half_time','second_half','full_time']);
 
 // ── Player ────────────────────────────────────────────────────────────────────
 export const PLAYER_POSITION = {
